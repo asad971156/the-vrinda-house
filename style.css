@@ -226,8 +226,6 @@ transition:.4s;
 text-align:center;
 }
 
-.card:hover{
-
 .amenities .card{
     display:block;
     visibility:visible;
@@ -250,9 +248,10 @@ text-align:center;
     color:#555;
     line-height:1.6;
 }
-    
-transform:translateY(-10px);
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .card h3{
