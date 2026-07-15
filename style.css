@@ -1,3 +1,7 @@
+html{
+    scroll-behavior:smooth;
+}
+
 *{
     margin:0;
     padding:0;
@@ -27,9 +31,12 @@ header{
     justify-content:space-between;
     align-items:center;
     padding:18px 8%;
-    background:white;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
     z-index:1000;
+    transition:all .3s ease;
 }
 
 .logo{
