@@ -220,6 +220,30 @@ text-align:center;
 }
 
 .card:hover{
+
+.amenities .card{
+    display:block;
+    visibility:visible;
+    opacity:1;
+}
+
+.amenities-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    align-items:stretch;
+}
+
+.amenities .card h3{
+    margin-bottom:15px;
+    color:#8B5E3C;
+}
+
+.amenities .card p{
+    color:#555;
+    line-height:1.6;
+}
+    
 transform:translateY(-10px);
 box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
