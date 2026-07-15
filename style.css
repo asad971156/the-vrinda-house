@@ -50,7 +50,10 @@ nav a:hover{
 
 .hero{
     height:100vh;
-    background:url("hero.jpg") center center/cover no-repeat;
+    background-image: url("hero.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
     display:flex;
     justify-content:center;
     align-items:center;
