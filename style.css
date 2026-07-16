@@ -306,22 +306,7 @@ padding:12px;
 font-size:18px;
 }
 
-.book-btn{
-display:inline-block;
-padding:18px 45px;
-background:#C89B3C;
-color:white;
-text-decoration:none;
-border-radius:50px;
-font-size:18px;
-font-weight:bold;
-transition:.3s;
-}
 
-.book-btn:hover{
-background:white;
-color:#111;
-}
 
 .nearby{
 padding:90px 8%;
@@ -667,7 +652,7 @@ color:#555;
 }
 
 section{
-    scroll-margin-top:140px;
+    scroll-margin-top:70px;
 }
 
 
