@@ -1,5 +1,6 @@
 html{
     scroll-behavior:smooth;
+    scroll-padding-top:140px;
 }
 
 *{
@@ -674,6 +675,9 @@ color:#555;
     box-shadow:0 15px 35px rgba(0,0,0,.35);
 }
 
+section{
+    scroll-margin-top:140px;
+}
 
 
 
