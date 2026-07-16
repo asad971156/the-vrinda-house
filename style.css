@@ -216,11 +216,6 @@ transition:.4s;
 text-align:center;
 }
 
-.amenities .card{
-    display:block;
-    visibility:visible;
-    opacity:1;
-}
 
 .amenities-grid{
     display:grid;
