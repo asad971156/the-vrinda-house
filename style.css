@@ -432,8 +432,9 @@ font-weight:500;
 }
 
 .contact{
-    padding:40px 8% 100px;
+    padding:100px 8%;
     background:#fff;
+    scroll-margin-top:150px;
 }
 
 .contact h2{
