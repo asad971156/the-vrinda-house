@@ -206,11 +206,6 @@ margin-bottom:50px;
 color:#8B5E3C;
 }
 
-.amenities-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
 
 .card{
 background:#ffffff;
