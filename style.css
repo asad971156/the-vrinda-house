@@ -59,11 +59,14 @@ nav a:hover{
 }
 
 .hero{
-    height:100vh;
-    background-image: url("hero.jpg");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+    height:calc(100vh - 110px);
+    margin-top:110px;
+
+    background-image:url("hero.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
     display:flex;
     justify-content:center;
     align-items:center;
