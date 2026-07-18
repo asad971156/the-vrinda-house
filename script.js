@@ -1,143 +1,255 @@
-// ==============================
-// HERO SLIDER (3 Seconds)
-// ==============================
+/*==================================
+PRELOADER
+==================================*/
+
+window.addEventListener("load", () => {
+
+    const preloader = document.getElementById("preloader");
+
+    setTimeout(() => {
+
+        preloader.style.opacity = "0";
+        preloader.style.visibility = "hidden";
+
+    }, 800);
+
+});
+
+/*==================================
+HEADER + PROGRESS BAR
+==================================*/
+
+const header = document.getElementById("header");
+const progressBar = document.getElementById("progress-bar");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 50) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+
+    const scrollTop = window.scrollY;
+
+    const docHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    const progress = (scrollTop / docHeight) * 100;
+
+    progressBar.style.width = progress + "%";
+
+});
+
+/*==================================
+HERO SLIDER
+==================================*/
 
 const slides = document.querySelectorAll(".slide");
 
 let currentSlide = 0;
 
-function showSlide(index){
+function changeSlide() {
 
-slides.forEach(slide=>{
-slide.classList.remove("active");
-});
+    slides[currentSlide].classList.remove("active");
 
-slides[index].classList.add("active");
+    currentSlide++;
 
-}
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
 
-setInterval(()=>{
-
-currentSlide++;
-
-if(currentSlide >= slides.length){
-currentSlide = 0;
-}
-
-showSlide(currentSlide);
-
-},3000);
-
-
-// ==============================
-// TRANSPARENT HEADER
-// ==============================
-
-const header = document.getElementById("header");
-
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY > 80){
-
-header.classList.add("scrolled");
-
-}else{
-
-header.classList.remove("scrolled");
+    slides[currentSlide].classList.add("active");
 
 }
 
+setInterval(changeSlide, 3000);
+
+/*==================================
+SMOOTH MENU SCROLL
+==================================*/
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+    anchor.addEventListener("click", function(e) {
+
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if (target) {
+
+            target.scrollIntoView({
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+    });
+
 });
 
+/*==================================
+MOBILE MENU
+==================================*/
 
-// ==============================
-// GOLDEN PROGRESS BAR
-// ==============================
+const menuBtn = document.querySelector(".mobile-menu");
+const nav = document.querySelector("nav");
 
-const progressBar = document.getElementById("progress-bar");
+menuBtn.addEventListener("click", () => {
 
-window.addEventListener("scroll",()=>{
-
-const scrollTop = document.documentElement.scrollTop;
-
-const height =
-document.documentElement.scrollHeight -
-document.documentElement.clientHeight;
-
-const progress = (scrollTop / height) * 100;
-
-progressBar.style.width = progress + "%";
+    nav.classList.toggle("show");
 
 });
 
+/*==================================
+SCROLL REVEAL
+==================================*/
 
-// ==============================
-// SMOOTH FADE UP
-// ==============================
+const revealElements = document.querySelectorAll(
+".about,.why-card,.amenity-card,.gallery-item,.review-card,.attraction-card,.faq-item,.info-box,.stat-box"
+);
 
-const observer = new IntersectionObserver((entries)=>{
+function revealOnScroll() {
 
-entries.forEach(entry=>{
+    revealElements.forEach(el => {
 
-if(entry.isIntersecting){
+        const top = el.getBoundingClientRect().top;
 
-entry.target.style.opacity="1";
-entry.target.style.transform="translateY(0)";
+        if (top < window.innerHeight - 100) {
+
+            el.classList.add("active");
+
+        }
+
+    });
 
 }
 
-});
+window.addEventListener("scroll", revealOnScroll);
 
-},{
-threshold:0.15
-});
+revealOnScroll();
 
-document.querySelectorAll(".section").forEach(section=>{
-
-section.style.opacity="0";
-
-section.style.transform="translateY(60px)";
-
-section.style.transition="all .8s ease";
-
-observer.observe(section);
-
-});
-
-
-// ==============================
-// NAVBAR ACTIVE LINK
-// ==============================
+/*==================================
+ACTIVE MENU
+==================================*/
 
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav ul li a");
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
-let current = "";
+    let current = "";
 
-sections.forEach(section=>{
+    sections.forEach(section => {
 
-const sectionTop = section.offsetTop - 120;
+        const sectionTop = section.offsetTop - 150;
 
-if(pageYOffset >= sectionTop){
+        if (window.scrollY >= sectionTop) {
 
-current = section.getAttribute("id");
+            current = section.getAttribute("id");
+
+        }
+
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+/*==============================
+MOBILE NAV
+==============================*/
+
+nav.show{
+
+    display:block;
+
+    position:absolute;
+
+    top:80px;
+
+    left:5%;
+
+    width:90%;
+
+    background:#fff;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    padding:20px;
 
 }
 
-});
+nav.show ul{
 
-navLinks.forEach(link=>{
+    flex-direction:column;
 
-link.classList.remove("active");
-
-if(link.getAttribute("href") === "#" + current){
-
-link.classList.add("active");
+    gap:20px;
 
 }
 
-});
+nav.show ul li a{
 
-});
+    color:#111;
+
+}
+
+/*==============================
+SCROLL ANIMATION
+==============================*/
+
+.about,
+.why-card,
+.amenity-card,
+.gallery-item,
+.review-card,
+.attraction-card,
+.faq-item,
+.info-box,
+.stat-box{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:.8s ease;
+
+}
+
+.about.active,
+.why-card.active,
+.amenity-card.active,
+.gallery-item.active,
+.review-card.active,
+.attraction-card.active,
+.faq-item.active,
+.info-box.active,
+.stat-box.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+nav ul li a.active{
+
+    color:var(--primary);
+
+}
