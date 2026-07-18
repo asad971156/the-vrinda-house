@@ -1,38 +1,47 @@
-// ===========================
-// HERO SLIDER (Optional)
-// ===========================
+// ==============================
+// HERO SLIDER (3 Seconds)
+// ==============================
 
 const slides = document.querySelectorAll(".slide");
 
-if (slides.length > 0) {
+let currentSlide = 0;
 
-let current = 0;
+function showSlide(index){
 
-setInterval(() => {
+slides.forEach(slide=>{
+slide.classList.remove("active");
+});
 
-slides[current].classList.remove("active");
-
-current = (current + 1) % slides.length;
-
-slides[current].classList.add("active");
-
-}, 5000);
+slides[index].classList.add("active");
 
 }
 
-// ===========================
-// STICKY HEADER
-// ===========================
+setInterval(()=>{
 
-const header = document.querySelector("header");
+currentSlide++;
 
-window.addEventListener("scroll", () => {
+if(currentSlide >= slides.length){
+currentSlide = 0;
+}
 
-if (window.scrollY > 50) {
+showSlide(currentSlide);
+
+},3000);
+
+
+// ==============================
+// TRANSPARENT HEADER
+// ==============================
+
+const header = document.getElementById("header");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY > 80){
 
 header.classList.add("scrolled");
 
-} else {
+}else{
 
 header.classList.remove("scrolled");
 
@@ -40,169 +49,95 @@ header.classList.remove("scrolled");
 
 });
 
-// ===========================
-// SMOOTH SCROLL
-// ===========================
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// ==============================
+// GOLDEN PROGRESS BAR
+// ==============================
 
-anchor.addEventListener("click", function (e) {
+const progressBar = document.getElementById("progress-bar");
 
-e.preventDefault();
+window.addEventListener("scroll",()=>{
 
-const target = document.querySelector(this.getAttribute("href"));
+const scrollTop = document.documentElement.scrollTop;
 
-if (target) {
+const height =
+document.documentElement.scrollHeight -
+document.documentElement.clientHeight;
 
-target.scrollIntoView({
+const progress = (scrollTop / height) * 100;
 
-behavior: "smooth"
-
-});
-
-}
+progressBar.style.width = progress + "%";
 
 });
 
-});
 
-// ===========================
-// SCROLL ANIMATION
-// ===========================
+// ==============================
+// SMOOTH FADE UP
+// ==============================
 
-const observer = new IntersectionObserver(
+const observer = new IntersectionObserver((entries)=>{
 
-(entries) => {
+entries.forEach(entry=>{
 
-entries.forEach((entry) => {
+if(entry.isIntersecting){
 
-if (entry.isIntersecting) {
-
-entry.target.classList.add("show");
+entry.target.style.opacity="1";
+entry.target.style.transform="translateY(0)";
 
 }
 
 });
 
-},
+},{
+threshold:0.15
+});
 
-{
+document.querySelectorAll(".section").forEach(section=>{
 
-threshold: 0.15
+section.style.opacity="0";
 
-}
+section.style.transform="translateY(60px)";
 
-);
+section.style.transition="all .8s ease";
 
-document
-.querySelectorAll(
-".box, .card, .gallery-item, .why-card, .near-card, .review-card, .faq-item, .contact-box"
-)
-.forEach((el) => {
-
-el.classList.add("hidden");
-
-observer.observe(el);
+observer.observe(section);
 
 });
 
-// ===========================
-// BACK TO TOP BUTTON
-// ===========================
 
-const topBtn = document.createElement("button");
+// ==============================
+// NAVBAR ACTIVE LINK
+// ==============================
 
-topBtn.innerHTML = "↑";
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav ul li a");
 
-topBtn.className = "top-btn";
+window.addEventListener("scroll",()=>{
 
-document.body.appendChild(topBtn);
+let current = "";
 
-window.addEventListener("scroll", () => {
+sections.forEach(section=>{
 
-if (window.scrollY > 500) {
+const sectionTop = section.offsetTop - 120;
 
-topBtn.style.display = "flex";
+if(pageYOffset >= sectionTop){
 
-} else {
-
-topBtn.style.display = "none";
+current = section.getAttribute("id");
 
 }
 
 });
 
-topBtn.addEventListener("click", () => {
+navLinks.forEach(link=>{
 
-window.scrollTo({
+link.classList.remove("active");
 
-top: 0,
+if(link.getAttribute("href") === "#" + current){
 
-behavior: "smooth"
+link.classList.add("active");
+
+}
 
 });
-
-});
-
-// ===========================
-// LOADER
-// ===========================
-
-
-/* Scroll Animation */
-
-.hidden{
-opacity:0;
-transform:translateY(40px);
-transition:all .8s ease;
-}
-
-.show{
-opacity:1;
-transform:translateY(0);
-}
-
-/* Sticky Header */
-
-header.scrolled{
-padding:0;
-background:#fff;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-/* Back To Top */
-
-.top-btn{
-position:fixed;
-right:20px;
-bottom:95px;
-width:50px;
-height:50px;
-border:none;
-border-radius:50%;
-background:#b8860b;
-color:#fff;
-font-size:22px;
-cursor:pointer;
-display:none;
-justify-content:center;
-align-items:center;
-z-index:999;
-box-shadow:0 8px 20px rgba(0,0,0,.25);
-transition:.3s;
-}
-
-.top-btn:hover{
-transform:translateY(-5px);
-background:#926d09;
-}
-
-body.loaded{
-opacity:1;
-transition:opacity .5s ease;
-}
-window.addEventListener("load", () => {
-
-document.body.classList.add("loaded");
 
 });
