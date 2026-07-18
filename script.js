@@ -148,6 +148,59 @@ behavior: "smooth"
 // LOADER
 // ===========================
 
+
+/* Scroll Animation */
+
+.hidden{
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* Sticky Header */
+
+header.scrolled{
+padding:0;
+background:#fff;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+/* Back To Top */
+
+.top-btn{
+position:fixed;
+right:20px;
+bottom:95px;
+width:50px;
+height:50px;
+border:none;
+border-radius:50%;
+background:#b8860b;
+color:#fff;
+font-size:22px;
+cursor:pointer;
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999;
+box-shadow:0 8px 20px rgba(0,0,0,.25);
+transition:.3s;
+}
+
+.top-btn:hover{
+transform:translateY(-5px);
+background:#926d09;
+}
+
+body.loaded{
+opacity:1;
+transition:opacity .5s ease;
+}
 window.addEventListener("load", () => {
 
 document.body.classList.add("loaded");
